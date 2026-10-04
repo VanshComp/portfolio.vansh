@@ -16,7 +16,6 @@ const FIELDS: Field[] = [
   { id: 'problem', label: 'What are you trying to solve?', placeholder: 'Describe the problem...', type: 'text', multiline: true },
   { id: 'process', label: 'What does the current process look like?', placeholder: 'How does it work today?', type: 'text', multiline: true },
   { id: 'outcome', label: 'What outcome are you looking for?', placeholder: 'What does success look like?', type: 'text', multiline: true },
-  { id: 'budget', label: 'Estimated budget', placeholder: 'e.g. $5,000 – $20,000', type: 'text' },
 ];
 
 export default function ContactExperience() {
