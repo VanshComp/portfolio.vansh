@@ -164,17 +164,6 @@ export default function ConsultingModel() {
                 >
                   DISCOVERY
                 </h3>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.7rem',
-                    color: 'var(--primary)',
-                    border: '1px solid rgba(255,101,0,0.3)',
-                    padding: '0.2rem 0.6rem',
-                  }}
-                >
-                  from $1,000
-                </span>
               </div>
               <div className="space-y-2 mb-4">
                 {['Understand the problem.', 'Research the possibilities.', 'Design the solution.', 'Validate the critical assumptions.']?.map((item) => (

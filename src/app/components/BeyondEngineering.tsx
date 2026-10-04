@@ -103,7 +103,7 @@ export default function BeyondEngineering() {
             <span style={{ fontSize: '1.5rem' }}>🏆</span>
             <div>
               <p style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--foreground)' }}>Rank 1</p>
-              <p style={{ fontSize: '0.7rem', color: 'var(--muted-foreground)' }}>Hack-MIT Workathon · Mar 2025</p>
+              <p style={{ fontSize: '0.7rem', color: 'var(--muted-foreground)' }}>Workathon INDIA· Mar 2025</p>
             </div>
           </div>
           <div
@@ -116,9 +116,9 @@ export default function BeyondEngineering() {
               border: '1px solid var(--border)',
             }}
           >
-            <span style={{ fontSize: '1.2rem' }}>🥈</span>
+            <span style={{ fontSize: '1.2rem' }}>🏆</span>
             <div>
-              <p style={{ fontWeight: 600, fontSize: '0.8rem', color: 'var(--foreground)' }}>Top 9</p>
+              <p style={{ fontWeight: 600, fontSize: '0.8rem', color: 'var(--foreground)' }}>Winner</p>
               <p style={{ fontSize: '0.7rem', color: 'var(--muted-foreground)' }}>National Woodpecker&apos;s Hackathon · Aug 2024</p>
             </div>
           </div>

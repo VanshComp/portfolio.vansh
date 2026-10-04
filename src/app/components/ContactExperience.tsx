@@ -11,6 +11,7 @@ interface Field {
 
 const FIELDS: Field[] = [
   { id: 'name', label: 'Your name', placeholder: 'Your name', type: 'text' },
+  { id: 'email', label: 'Your email', placeholder: 'you@example.com', type: 'email' },
   { id: 'company', label: 'Your company', placeholder: 'Your company (or "solo")', type: 'text' },
   { id: 'problem', label: 'What are you trying to solve?', placeholder: 'Describe the problem...', type: 'text', multiline: true },
   { id: 'process', label: 'What does the current process look like?', placeholder: 'How does it work today?', type: 'text', multiline: true },
@@ -24,6 +25,8 @@ export default function ContactExperience() {
   const [values, setValues] = useState<Record<string, string>>({});
   const [activeField, setActiveField] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -45,9 +48,29 @@ export default function ContactExperience() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => null);
+        throw new Error(result?.error || 'Your message could not be sent. Please try again.');
+      }
+
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : 'Your message could not be sent. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const isFieldVisible = (index: number) => {
@@ -151,7 +174,7 @@ export default function ContactExperience() {
             </a>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} noValidate>
+          <form onSubmit={handleSubmit}>
             <div className="space-y-8">
               {FIELDS.map((field, i) => (
                 <div
@@ -203,6 +226,7 @@ export default function ContactExperience() {
                       }}
                       onFocus={() => setActiveField(i)}
                       onKeyDown={(e) => handleKeyDown(e, i)}
+                      required={field.id === 'name' || field.id === 'email'}
                       aria-label={field.label}
                     />
                   )}
@@ -243,10 +267,19 @@ export default function ContactExperience() {
                 <button
                   type="submit"
                   className="btn-primary"
+                  disabled={isSubmitting}
                   style={{ fontSize: '0.85rem', padding: '1rem 2.5rem' }}
                 >
-                  Send the problem →
+                  {isSubmitting ? 'Sending…' : 'Send the problem →'}
                 </button>
+                {submitError && (
+                  <p role="alert" style={{ marginTop: '1rem', color: 'var(--primary)', fontSize: '0.85rem' }}>
+                    {submitError} You can also email me at{' '}
+                    <a href="mailto:vanshgautam2005@gmail.com" style={{ textDecoration: 'underline' }}>
+                      vanshgautam2005@gmail.com
+                    </a>.
+                  </p>
+                )}
                 <p
                   style={{
                     marginTop: '1.5rem',

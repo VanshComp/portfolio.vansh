@@ -25,6 +25,15 @@ npm run dev
 
 Then open http://localhost:3000.
 
+## Contact form email
+
+The contact form sends inquiries to `vanshgautam2005@gmail.com` through Resend. Set these server-side environment variables locally and in your deployment:
+
+- `RESEND_API_KEY`: an API key from Resend.
+- `RESEND_FROM_EMAIL`: a sender address authorized by Resend. `Portfolio <onboarding@resend.dev>` can be used for testing to your own verified address; use an address on a domain verified with Resend for production.
+
+See `.env.example` for the variable names. Do not expose the API key through a `NEXT_PUBLIC_` variable.
+
 
 ## v9 focus
 - Persistent cinematic chapter rail on desktop.
