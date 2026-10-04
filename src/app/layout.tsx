@@ -1,22 +1,12 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { DM_Sans, JetBrains_Mono } from 'next/font/google';
 // @ts-ignore - Next.js handles global CSS imports for app-router layouts.
 import '../styles/tailwind.css';
 
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
-  variable: '--font-sans',
-  display: 'swap',
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-mono',
-  display: 'swap',
-});
+const fontVariables: React.CSSProperties & Record<'--font-sans' | '--font-mono', string> = {
+  '--font-sans': 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  '--font-mono': 'ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace',
+};
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -45,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${jetbrainsMono.variable}`}>
-      <body className={dmSans.className}>
+    <html lang="en" style={fontVariables}>
+      <body style={{ fontFamily: 'var(--font-sans)' }}>
         {children}
 
         <script type="module" async src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fvanshgauta3467back.builtwithrocket.new&_be=https%3A%2F%2Fappanalytics.rocket.new&_v=0.1.20" />
